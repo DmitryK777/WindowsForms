@@ -50,11 +50,14 @@
 			this.checkBoxShowWeekDay = new System.Windows.Forms.CheckBox();
 			this.buttonHideControls = new System.Windows.Forms.Button();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// labelTime
 			// 
+			this.labelTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelTime.AutoSize = true;
 			this.labelTime.ContextMenuStrip = this.contextMenuStrip;
 			this.labelTime.Font = new System.Drawing.Font("Arial Black", 32.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -63,6 +66,7 @@
 			this.labelTime.Size = new System.Drawing.Size(142, 60);
 			this.labelTime.TabIndex = 0;
 			this.labelTime.Text = "Time";
+			this.labelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.labelTime.DoubleClick += new System.EventHandler(this.labelTime_DoubleClick);
 			// 
 			// contextMenuStrip
@@ -142,14 +146,16 @@
 			// toolStripMenuItemBackgroundColor
 			// 
 			this.toolStripMenuItemBackgroundColor.Name = "toolStripMenuItemBackgroundColor";
-			this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(168, 22);
+			this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(180, 22);
 			this.toolStripMenuItemBackgroundColor.Text = "Background color";
+			this.toolStripMenuItemBackgroundColor.Click += new System.EventHandler(this.toolStripMenuItemBackgroundColor_Click);
 			// 
 			// toolStripMenuItemForegroundColor
 			// 
 			this.toolStripMenuItemForegroundColor.Name = "toolStripMenuItemForegroundColor";
-			this.toolStripMenuItemForegroundColor.Size = new System.Drawing.Size(168, 22);
+			this.toolStripMenuItemForegroundColor.Size = new System.Drawing.Size(180, 22);
 			this.toolStripMenuItemForegroundColor.Text = "Foreground color";
+			this.toolStripMenuItemForegroundColor.Click += new System.EventHandler(this.toolStripMenuItemForegroundColor_Click);
 			// 
 			// toolStripSeparator3
 			// 
@@ -221,7 +227,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(352, 352);
+			this.ClientSize = new System.Drawing.Size(354, 351);
 			this.ContextMenuStrip = this.contextMenuStrip;
 			this.Controls.Add(this.buttonHideControls);
 			this.Controls.Add(this.checkBoxShowWeekDay);
@@ -259,6 +265,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLoadOnWindowsStartup;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
+		private System.Windows.Forms.ColorDialog colorDialog;
 	}
 }
 
