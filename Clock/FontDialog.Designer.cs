@@ -155,6 +155,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FontDialog";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Choose clock font";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
 			this.ResumeLayout(false);

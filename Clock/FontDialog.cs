@@ -22,9 +22,12 @@ namespace Clock
 		public FontDialog()
 		{
 			InitializeComponent();
+			
 			execution_path = Path.GetDirectoryName(Application.ExecutablePath);
 			fonts_path = $"{execution_path}\\..\\..\\Fonts";
 			LoadFonts();
+
+			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - (2 * this.Width) + this.Width/2, this.Height + this.Height/2);
 		}
 
 		void LoadFonts()
