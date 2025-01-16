@@ -86,7 +86,7 @@
             this.toolStripMenuItemLoadOnWindowsStartup,
             this.toolStripMenuItemExit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(210, 242);
+			this.contextMenuStrip.Size = new System.Drawing.Size(210, 220);
 			// 
 			// toolStripMenuItemTopmost
 			// 
@@ -249,6 +249,7 @@
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Clock VPD_311";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.contextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();

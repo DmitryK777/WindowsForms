@@ -81,7 +81,7 @@
             0,
             0});
 			this.numericUpDownFontSize.Minimum = new decimal(new int[] {
-            15,
+            8,
             0,
             0,
             0});
@@ -168,10 +168,10 @@
 		private System.Windows.Forms.ComboBox comboBoxFonts;
 		private System.Windows.Forms.Label labelChooseFont;
 		private System.Windows.Forms.Label labelFontSize;
-		private System.Windows.Forms.NumericUpDown numericUpDownFontSize;
 		private System.Windows.Forms.Label labelExample;
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonApply;
+		public System.Windows.Forms.NumericUpDown numericUpDownFontSize;
 	}
 }

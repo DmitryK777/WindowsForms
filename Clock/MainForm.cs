@@ -18,16 +18,23 @@ namespace Clock
 		public MainForm()
 		{
 			InitializeComponent();
+
 			labelTime.BackColor = Color.AliceBlue;
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - (2 * this.Width), 100);
 			
 			toolStripMenuItemShowControls.Checked = true;
 			toolStripMenuItemShowConsole.Checked = false;
 			
-			fontDialog = new FontDialog();
+			//fontDialog = new FontDialog();
 			Console.WriteLine(Directory.GetCurrentDirectory());
+
+			LoadSettings();
+			if(fontDialog == null) fontDialog = new FontDialog();
+
 			
 		}
+
+		
 
 		void SetVisibility (bool visible)
 		{
@@ -39,8 +46,68 @@ namespace Clock
 			this.TransparencyKey = visible ? Color.Empty : this.BackColor;
 		}
 
+		void LoadSettings()
+		{
+			StreamReader sr = null;
+
+			try
+			{
+				sr = new StreamReader($"{Path.GetDirectoryName(Application.ExecutablePath)}\\..\\..\\Settings.ini");
+
+				toolStripMenuItemTopmost.Checked = Boolean.Parse(sr.ReadLine());         // TopMost
+				toolStripMenuItemShowControls.Checked = Boolean.Parse(sr.ReadLine());    // ShowControls
+				toolStripMenuItemShowConsole.Checked = Boolean.Parse(sr.ReadLine());     // ShowConsole
+				toolStripMenuItemShowDate.Checked = Boolean.Parse(sr.ReadLine());        // ShowDate
+				toolStripMenuItemShowWeekday.Checked = Boolean.Parse(sr.ReadLine());     // ShowWeekday
+
+				string fontname = sr.ReadLine();                                         // Font
+				float fontsize = (float)Convert.ToDouble(sr.ReadLine());                           // FontSize
+
+				labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));    // BackgroundColor
+				labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));    // ForegroundColor
+
+				sr.Close();
+
+				fontDialog = new FontDialog(fontname, fontsize);
+				labelTime.Font = FontDialog.DefaultFont;
+
+				
+			}
+			catch (Exception ex) 
+			{
+				MessageBox.Show(this, ex.Message, "In LoadSettings()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(this, ex.ToString(), "In LoadSettings()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			
+
+			
+		}
+
+		void SaveSettings()
+		{
+			StreamWriter sw = 
+				new StreamWriter($"{ Path.GetDirectoryName(Application.ExecutablePath)}\\..\\..\\Settings.ini");
+
+			sw.WriteLine($"{toolStripMenuItemTopmost.Checked}");       // TopMost
+			sw.WriteLine($"{toolStripMenuItemShowControls.Checked}");  // ShowControls
+			sw.WriteLine($"{toolStripMenuItemShowConsole.Checked}");   // ShowConsole
+			sw.WriteLine($"{toolStripMenuItemShowDate.Checked}");      // ShowDate
+			sw.WriteLine($"{toolStripMenuItemShowWeekday.Checked}");   // ShowWeekday
+
+			sw.WriteLine($"{fontDialog.FontFilename}");                    // Font
+			sw.WriteLine($"{labelTime.Font.Size}");                    // FontSize
+
+			sw.WriteLine($"{labelTime.BackColor.ToArgb()}");           // BackgroundColor
+			sw.WriteLine($"{labelTime.ForeColor.ToArgb()}");           // ForegroundColor
+
+			sw.Close();
+		}
+
 		private void timer_Tick(object sender, EventArgs e)
 		{
+			this.DoubleBuffered = true;
+			//this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
 			labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
 			//labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
 
@@ -54,6 +121,8 @@ namespace Clock
 				$"{DateTime.Now.ToString("HH:mm:ss")}\n" +
 				$"{DateTime.Now.ToString("yyyy:MM:dd")}\n" +
 				$"{DateTime.Now.DayOfWeek}";
+
+			
 		}
 
 		private void buttonHideControls_Click(object sender, EventArgs e)
@@ -126,5 +195,10 @@ namespace Clock
 		static extern bool AllocConsole();
 		[DllImport("kernel32.dll")]
 		static extern bool FreeConsole();
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			SaveSettings();
+		}
 	}
 }
