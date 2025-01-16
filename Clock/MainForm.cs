@@ -17,6 +17,8 @@ namespace Clock
 			InitializeComponent();
 			labelTime.BackColor = Color.AliceBlue;
 			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - (2 * this.Width), 100);
+			
+			toolStripMenuItemShowControls.Checked = true;
 		}
 
 		void SetVisibility (bool visible)
@@ -48,14 +50,37 @@ namespace Clock
 
 		private void buttonHideControls_Click(object sender, EventArgs e)
 		{
-			SetVisibility(false);
+			//SetVisibility(false);
+			toolStripMenuItemShowControls.Checked = false;
 		}
 
 		private void labelTime_DoubleClick(object sender, EventArgs e)
 		{
-			SetVisibility(true);
+			//SetVisibility(true);
+			toolStripMenuItemShowControls.Checked = false;
 		}
 
+		private void toolStripMenuItemExit_Click(object sender, EventArgs e) => this.Close();
+
+		private void toolStripMenuItemTopmost_CheckedChanged(object sender, EventArgs e) => this.TopMost = toolStripMenuItemTopmost.Checked;
+
+		private void toolStripMenuItemShowControls_CheckStateChanged(object sender, EventArgs e) => 
+			SetVisibility(toolStripMenuItemShowControls.Checked);
+
+		private void toolStripMenuItemShowDate_CheckedChanged(object sender, EventArgs e) => 
+			checkBoxShowDate.Checked = toolStripMenuItemShowDate.Checked;
+
+		private void checkBoxShowDate_CheckedChanged(object sender, EventArgs e) => 
+			toolStripMenuItemShowDate.Checked = checkBoxShowDate.Checked;
+
+		private void toolStripMenuItemShowWeekday_CheckedChanged(object sender, EventArgs e) => 
+			checkBoxShowWeekDay.Checked = toolStripMenuItemShowWeekday.Checked;
+
+		private void checkBoxShowWeekDay_CheckedChanged(object sender, EventArgs e) => 
+			toolStripMenuItemShowWeekday.Checked = checkBoxShowWeekDay.Checked;
 		
+
+
+
 	}
 }
