@@ -51,6 +51,7 @@
 			this.buttonHideControls = new System.Windows.Forms.Button();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
+			this.toolStripMenuItemShowConsole = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -74,6 +75,7 @@
 			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemTopmost,
             this.toolStripMenuItemShowControls,
+            this.toolStripMenuItemShowConsole,
             this.toolStripSeparator1,
             this.toolStripMenuItemShowDate,
             this.toolStripMenuItemShowWeekday,
@@ -84,7 +86,7 @@
             this.toolStripMenuItemLoadOnWindowsStartup,
             this.toolStripMenuItemExit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(210, 198);
+			this.contextMenuStrip.Size = new System.Drawing.Size(210, 242);
 			// 
 			// toolStripMenuItemTopmost
 			// 
@@ -133,6 +135,7 @@
 			this.toolStripMenuItemChooseFont.Name = "toolStripMenuItemChooseFont";
 			this.toolStripMenuItemChooseFont.Size = new System.Drawing.Size(209, 22);
 			this.toolStripMenuItemChooseFont.Text = "Choose font";
+			this.toolStripMenuItemChooseFont.Click += new System.EventHandler(this.toolStripMenuItemChooseFont_Click);
 			// 
 			// toolStripMenuItemColors
 			// 
@@ -146,14 +149,14 @@
 			// toolStripMenuItemBackgroundColor
 			// 
 			this.toolStripMenuItemBackgroundColor.Name = "toolStripMenuItemBackgroundColor";
-			this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(180, 22);
+			this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(168, 22);
 			this.toolStripMenuItemBackgroundColor.Text = "Background color";
 			this.toolStripMenuItemBackgroundColor.Click += new System.EventHandler(this.toolStripMenuItemBackgroundColor_Click);
 			// 
 			// toolStripMenuItemForegroundColor
 			// 
 			this.toolStripMenuItemForegroundColor.Name = "toolStripMenuItemForegroundColor";
-			this.toolStripMenuItemForegroundColor.Size = new System.Drawing.Size(180, 22);
+			this.toolStripMenuItemForegroundColor.Size = new System.Drawing.Size(168, 22);
 			this.toolStripMenuItemForegroundColor.Text = "Foreground color";
 			this.toolStripMenuItemForegroundColor.Click += new System.EventHandler(this.toolStripMenuItemForegroundColor_Click);
 			// 
@@ -222,6 +225,15 @@
 			this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
 			this.notifyIcon.Text = "notifyIcon";
 			this.notifyIcon.Visible = true;
+			this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+			// 
+			// toolStripMenuItemShowConsole
+			// 
+			this.toolStripMenuItemShowConsole.CheckOnClick = true;
+			this.toolStripMenuItemShowConsole.Name = "toolStripMenuItemShowConsole";
+			this.toolStripMenuItemShowConsole.Size = new System.Drawing.Size(209, 22);
+			this.toolStripMenuItemShowConsole.Text = "Show console";
+			this.toolStripMenuItemShowConsole.CheckedChanged += new System.EventHandler(this.toolStripMenuItemShowConsole_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -266,6 +278,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLoadOnWindowsStartup;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
 		private System.Windows.Forms.ColorDialog colorDialog;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShowConsole;
 	}
 }
 
