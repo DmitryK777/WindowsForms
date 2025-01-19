@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using Microsoft.Win32;
 
 namespace Clock
 {
 	public partial class MainForm : Form
 	{
 		FontDialog fontDialog;
+		AlarmsForm alarmsForm;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -29,13 +31,12 @@ namespace Clock
 			Console.WriteLine(Directory.GetCurrentDirectory());
 
 			LoadSettings();
-			if(fontDialog == null) fontDialog = new FontDialog();
+			alarmsForm = new AlarmsForm();
 
-			
+			if(fontDialog == null) fontDialog = new FontDialog();
 		}
 
 		
-
 		void SetVisibility (bool visible)
 		{
 			checkBoxShowDate.Visible = visible;
@@ -61,7 +62,7 @@ namespace Clock
 				toolStripMenuItemShowWeekday.Checked = Boolean.Parse(sr.ReadLine());     // ShowWeekday
 
 				string fontname = sr.ReadLine();                                         // Font
-				float fontsize = (float)Convert.ToDouble(sr.ReadLine());                           // FontSize
+				float fontsize = (float)Convert.ToDouble(sr.ReadLine());                 // FontSize
 
 				labelTime.BackColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));    // BackgroundColor
 				labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine()));    // ForegroundColor
@@ -69,7 +70,7 @@ namespace Clock
 				sr.Close();
 
 				fontDialog = new FontDialog(fontname, fontsize);
-				labelTime.Font = FontDialog.DefaultFont;
+				labelTime.Font = fontDialog.Font;
 
 				
 			}
@@ -94,7 +95,7 @@ namespace Clock
 			sw.WriteLine($"{toolStripMenuItemShowDate.Checked}");      // ShowDate
 			sw.WriteLine($"{toolStripMenuItemShowWeekday.Checked}");   // ShowWeekday
 
-			sw.WriteLine($"{fontDialog.FontFilename}");                    // Font
+			sw.WriteLine($"{fontDialog.FontFilename}");                // Font
 			sw.WriteLine($"{labelTime.Font.Size}");                    // FontSize
 
 			sw.WriteLine($"{labelTime.BackColor.ToArgb()}");           // BackgroundColor
@@ -105,7 +106,7 @@ namespace Clock
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			this.DoubleBuffered = true;
+			//this.DoubleBuffered = true;
 			//this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
 			labelTime.Text = DateTime.Now.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
@@ -199,6 +200,22 @@ namespace Clock
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			SaveSettings();
+		}
+
+		private void toolStripMenuItemLoadOnWindowsStartup_CheckedChanged(object sender, EventArgs e)
+		{
+			string key_name = "Clock_VPD_311";
+			RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true); // true - writable
+
+			if (toolStripMenuItemLoadOnWindowsStartup.Checked) key.SetValue(key_name, Application.ExecutablePath);
+			else key.DeleteValue(key_name, false); // false - throwOnMissingValue (бросить исключение если удаляемое значение отсутствует)
+
+			key.Dispose(); // Высвобождение ресурсов
+		}
+
+		private void toolStripMenuItemAlarms_Click(object sender, EventArgs e)
+		{
+			alarmsForm.ShowDialog();
 		}
 	}
 }

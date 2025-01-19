@@ -34,6 +34,7 @@
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemTopmost = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemShowControls = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemShowConsole = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemShowDate = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemShowWeekday = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,8 @@
 			this.buttonHideControls = new System.Windows.Forms.Button();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
-			this.toolStripMenuItemShowConsole = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemAlarms = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -62,12 +64,13 @@
 			this.labelTime.AutoSize = true;
 			this.labelTime.ContextMenuStrip = this.contextMenuStrip;
 			this.labelTime.Font = new System.Drawing.Font("Arial Black", 32.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelTime.Location = new System.Drawing.Point(12, 25);
+			this.labelTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.labelTime.Location = new System.Drawing.Point(15, 20);
 			this.labelTime.Name = "labelTime";
 			this.labelTime.Size = new System.Drawing.Size(142, 60);
 			this.labelTime.TabIndex = 0;
 			this.labelTime.Text = "Time";
-			this.labelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.labelTime.DoubleClick += new System.EventHandler(this.labelTime_DoubleClick);
 			// 
 			// contextMenuStrip
@@ -83,10 +86,12 @@
             this.toolStripMenuItemChooseFont,
             this.toolStripMenuItemColors,
             this.toolStripSeparator3,
+            this.toolStripMenuItemAlarms,
+            this.toolStripSeparator4,
             this.toolStripMenuItemLoadOnWindowsStartup,
             this.toolStripMenuItemExit});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(210, 220);
+			this.contextMenuStrip.Size = new System.Drawing.Size(210, 270);
 			// 
 			// toolStripMenuItemTopmost
 			// 
@@ -103,6 +108,14 @@
 			this.toolStripMenuItemShowControls.Size = new System.Drawing.Size(209, 22);
 			this.toolStripMenuItemShowControls.Text = "Show controls";
 			this.toolStripMenuItemShowControls.CheckStateChanged += new System.EventHandler(this.toolStripMenuItemShowControls_CheckStateChanged);
+			// 
+			// toolStripMenuItemShowConsole
+			// 
+			this.toolStripMenuItemShowConsole.CheckOnClick = true;
+			this.toolStripMenuItemShowConsole.Name = "toolStripMenuItemShowConsole";
+			this.toolStripMenuItemShowConsole.Size = new System.Drawing.Size(209, 22);
+			this.toolStripMenuItemShowConsole.Text = "Show console";
+			this.toolStripMenuItemShowConsole.CheckedChanged += new System.EventHandler(this.toolStripMenuItemShowConsole_CheckedChanged);
 			// 
 			// toolStripSeparator1
 			// 
@@ -171,6 +184,7 @@
 			this.toolStripMenuItemLoadOnWindowsStartup.Name = "toolStripMenuItemLoadOnWindowsStartup";
 			this.toolStripMenuItemLoadOnWindowsStartup.Size = new System.Drawing.Size(209, 22);
 			this.toolStripMenuItemLoadOnWindowsStartup.Text = "Load on Windows startup";
+			this.toolStripMenuItemLoadOnWindowsStartup.CheckedChanged += new System.EventHandler(this.toolStripMenuItemLoadOnWindowsStartup_CheckedChanged);
 			// 
 			// toolStripMenuItemExit
 			// 
@@ -227,24 +241,30 @@
 			this.notifyIcon.Visible = true;
 			this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
 			// 
-			// toolStripMenuItemShowConsole
+			// toolStripMenuItemAlarms
 			// 
-			this.toolStripMenuItemShowConsole.CheckOnClick = true;
-			this.toolStripMenuItemShowConsole.Name = "toolStripMenuItemShowConsole";
-			this.toolStripMenuItemShowConsole.Size = new System.Drawing.Size(209, 22);
-			this.toolStripMenuItemShowConsole.Text = "Show console";
-			this.toolStripMenuItemShowConsole.CheckedChanged += new System.EventHandler(this.toolStripMenuItemShowConsole_CheckedChanged);
+			this.toolStripMenuItemAlarms.Name = "toolStripMenuItemAlarms";
+			this.toolStripMenuItemAlarms.Size = new System.Drawing.Size(209, 22);
+			this.toolStripMenuItemAlarms.Text = "Alarms";
+			this.toolStripMenuItemAlarms.Click += new System.EventHandler(this.toolStripMenuItemAlarms_Click);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(206, 6);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(354, 351);
 			this.ContextMenuStrip = this.contextMenuStrip;
 			this.Controls.Add(this.buttonHideControls);
 			this.Controls.Add(this.checkBoxShowWeekDay);
 			this.Controls.Add(this.checkBoxShowDate);
 			this.Controls.Add(this.labelTime);
+			this.DoubleBuffered = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -280,6 +300,8 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
 		private System.Windows.Forms.ColorDialog colorDialog;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShowConsole;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAlarms;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 	}
 }
 
