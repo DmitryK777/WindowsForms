@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using Microsoft.Win32;
+using AxWMPLib;
 
 namespace Clock
 {
@@ -36,6 +37,7 @@ namespace Clock
 			alarmsForm = new AlarmsForm(this);
 
 			if(fontDialog == null) fontDialog = new FontDialog();
+			axWindowsMediaPlayer.Visible = false;
 		}
 
 		
@@ -134,7 +136,23 @@ namespace Clock
 
 			
 			nextAlarm = FindNextAlarm();
-			if(nextAlarm != null) Console.WriteLine(nextAlarm);
+			if (nextAlarm != null) Console.WriteLine(nextAlarm); 
+				
+			if(
+				nextAlarm != null &&
+				nextAlarm.Time.Hours == DateTime.Now.Hour &&
+				nextAlarm.Time.Minutes == DateTime.Now.Minute &&
+				nextAlarm.Time.Seconds == DateTime.Now.Second
+				)
+			{
+				System.Threading.Thread.Sleep(1000);
+				axWindowsMediaPlayer.Visible = true;
+				axWindowsMediaPlayer.URL = nextAlarm.Filename;
+				axWindowsMediaPlayer.settings.volume = 100;
+				axWindowsMediaPlayer.Ctlcontrols.play();
+				if(nextAlarm.Message != "")
+					MessageBox.Show(this, nextAlarm.Message, "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information );
+			}
 			
 
 		}
