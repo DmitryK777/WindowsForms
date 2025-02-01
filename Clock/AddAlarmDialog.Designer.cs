@@ -32,10 +32,12 @@
 			this.checkBoxUseDate = new System.Windows.Forms.CheckBox();
 			this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
 			this.dateTimePickerTime = new System.Windows.Forms.DateTimePicker();
-			this.fileName = new System.Windows.Forms.Label();
+			this.labelFilename = new System.Windows.Forms.Label();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.checkedListBoxWeekdays = new System.Windows.Forms.CheckedListBox();
+			this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
+			this.buttonChooseFile = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// checkBoxUseDate
@@ -69,19 +71,20 @@
 			this.dateTimePickerTime.Size = new System.Drawing.Size(156, 31);
 			this.dateTimePickerTime.TabIndex = 2;
 			// 
-			// fileName
+			// labelFilename
 			// 
-			this.fileName.AutoSize = true;
-			this.fileName.Location = new System.Drawing.Point(12, 142);
-			this.fileName.Name = "fileName";
-			this.fileName.Size = new System.Drawing.Size(48, 13);
-			this.fileName.TabIndex = 4;
-			this.fileName.Text = "fileName";
+			this.labelFilename.AutoSize = true;
+			this.labelFilename.Location = new System.Drawing.Point(21, 200);
+			this.labelFilename.MaximumSize = new System.Drawing.Size(350, 0);
+			this.labelFilename.Name = "labelFilename";
+			this.labelFilename.Size = new System.Drawing.Size(52, 13);
+			this.labelFilename.TabIndex = 4;
+			this.labelFilename.Text = "Filename:";
 			// 
 			// buttonOK
 			// 
 			this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonOK.Location = new System.Drawing.Point(187, 166);
+			this.buttonOK.Location = new System.Drawing.Point(197, 267);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(75, 23);
 			this.buttonOK.TabIndex = 5;
@@ -92,7 +95,7 @@
 			// buttonCancel
 			// 
 			this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonCancel.Location = new System.Drawing.Point(268, 166);
+			this.buttonCancel.Location = new System.Drawing.Point(278, 267);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 23);
 			this.buttonCancel.TabIndex = 6;
@@ -116,17 +119,37 @@
 			this.checkedListBoxWeekdays.MultiColumn = true;
 			this.checkedListBoxWeekdays.Name = "checkedListBoxWeekdays";
 			this.checkedListBoxWeekdays.Size = new System.Drawing.Size(340, 19);
-			this.checkedListBoxWeekdays.TabIndex = 3;
+			this.checkedListBoxWeekdays.TabIndex = 7;
+			// 
+			// richTextBoxMessage
+			// 
+			this.richTextBoxMessage.Location = new System.Drawing.Point(13, 122);
+			this.richTextBoxMessage.Name = "richTextBoxMessage";
+			this.richTextBoxMessage.Size = new System.Drawing.Size(340, 56);
+			this.richTextBoxMessage.TabIndex = 7;
+			this.richTextBoxMessage.Text = "";
+			// 
+			// buttonChooseFile
+			// 
+			this.buttonChooseFile.Location = new System.Drawing.Point(13, 267);
+			this.buttonChooseFile.Name = "buttonChooseFile";
+			this.buttonChooseFile.Size = new System.Drawing.Size(70, 23);
+			this.buttonChooseFile.TabIndex = 8;
+			this.buttonChooseFile.Text = "Обзор";
+			this.buttonChooseFile.UseVisualStyleBackColor = true;
+			this.buttonChooseFile.Click += new System.EventHandler(this.buttonChooseFile_Click);
 			// 
 			// AddAlarmDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(368, 206);
+			this.ClientSize = new System.Drawing.Size(368, 302);
+			this.Controls.Add(this.buttonChooseFile);
+			this.Controls.Add(this.richTextBoxMessage);
 			this.Controls.Add(this.checkedListBoxWeekdays);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOK);
-			this.Controls.Add(this.fileName);
+			this.Controls.Add(this.labelFilename);
 			this.Controls.Add(this.dateTimePickerTime);
 			this.Controls.Add(this.dateTimePickerDate);
 			this.Controls.Add(this.checkBoxUseDate);
@@ -146,9 +169,11 @@
 		private System.Windows.Forms.CheckBox checkBoxUseDate;
 		private System.Windows.Forms.DateTimePicker dateTimePickerDate;
 		private System.Windows.Forms.DateTimePicker dateTimePickerTime;
-		private System.Windows.Forms.Label fileName;
+		private System.Windows.Forms.Label labelFilename;
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.CheckedListBox checkedListBoxWeekdays;
+		private System.Windows.Forms.RichTextBox richTextBoxMessage;
+		private System.Windows.Forms.Button buttonChooseFile;
 	}
 }
