@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Clock
 {
@@ -17,12 +18,25 @@ namespace Clock
 		{
 			InitializeComponent();
 			dialog = new AddAlarmDialog();
-			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - (2 * this.Width) + this.Width / 2, this.Height + this.Height / 2);
+		}
 
+		public AlarmsForm(System.Windows.Forms.Form parent) : this()
+		{
+			this.StartPosition = FormStartPosition.Manual;
+			this.Location = new Point
+				(
+					parent.Location.X - this.Width,
+					parent.Location.Y
+				);
 		}
 
 		private void buttonAdd_Click(object sender, EventArgs e)
 		{
+			dialog.Location = new Point
+				(
+					this.Location.X + (this.Width - dialog.Width) / 2,
+					this.Location.Y + (this.Height - dialog.Height) / 2
+				);
 			dialog.ShowDialog();
 		}
 	}

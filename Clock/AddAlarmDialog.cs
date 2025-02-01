@@ -15,8 +15,8 @@ namespace Clock
 		public AddAlarmDialog()
 		{
 			InitializeComponent();
-			this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - (2 * this.Width), 4 * this.Height);
 			dateTimePickerDate.Enabled = false;
+			this.StartPosition = FormStartPosition.Manual;
 		}
 
 		private void checkBoxUseDate_CheckedChanged(object sender, EventArgs e)
