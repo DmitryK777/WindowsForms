@@ -17,6 +17,8 @@ namespace Clock
 	{
 		FontDialog fontDialog;
 		AlarmsForm alarmsForm;
+		Alarm nextAlarm;
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -104,6 +106,13 @@ namespace Clock
 			sw.Close();
 		}
 
+		Alarm FindNextAlarm()
+		{
+			nextAlarm = alarmsForm.Alarms.Items.Cast<Alarm>().ToArray().Min();
+
+			return nextAlarm;
+		}
+
 		private void timer_Tick(object sender, EventArgs e)
 		{
 			//this.DoubleBuffered = true;
@@ -124,6 +133,10 @@ namespace Clock
 				$"{DateTime.Now.DayOfWeek}";
 
 			
+			nextAlarm = FindNextAlarm();
+			if(nextAlarm != null) Console.WriteLine(nextAlarm);
+			
+
 		}
 
 		private void buttonHideControls_Click(object sender, EventArgs e)
@@ -189,7 +202,7 @@ namespace Clock
 
 		private void toolStripMenuItemShowConsole_CheckedChanged(object sender, EventArgs e)
 		{
-			//AllocConsole();
+			AllocConsole();
 			bool show = toolStripMenuItemShowConsole.Checked ? AllocConsole() : FreeConsole();
 		}
 		[DllImport("kernel32.dll")]
